@@ -1,7 +1,9 @@
 package main.services;
 
 import lombok.RequiredArgsConstructor;
+import main.controllers.dto.ItemRequest;
 import main.controllers.dto.ItemResponse;
+import main.mappers.ItemRequestItemMapper;
 import main.mappers.ItemResponseMapper;
 import main.repository.ItemRepo;
 import main.repository.entity.Item;
@@ -18,6 +20,8 @@ public class ItemService {
     private final ItemRepo itemRepo;
     private final ItemResponseMapper itemResponseMapper;
 
+    private final ItemRequestItemMapper itemRequestItemMapper;
+
     public List<ItemResponse> findAll() {
         return itemRepo.findAll()
                 .stream()
@@ -26,4 +30,9 @@ public class ItemService {
     }
 
 
+    public ItemResponse save(ItemRequest itemRequest) {
+        Item item = itemRequestItemMapper.map(itemRequest);
+        itemRepo.save(item);
+        return itemResponseMapper.map(item);
+    }
 }

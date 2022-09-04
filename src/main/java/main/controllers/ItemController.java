@@ -1,12 +1,11 @@
 package main.controllers;
 
 import lombok.RequiredArgsConstructor;
+import main.controllers.dto.ItemRequest;
 import main.controllers.dto.ItemResponse;
 import main.repository.entity.Item;
 import main.services.ItemService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +20,11 @@ public class ItemController {
     @GetMapping(value = "all")
     public List<ItemResponse> findAll() {
         return itemService.findAll();
+    }
+
+    @PostMapping
+    public ItemResponse save(@RequestBody ItemRequest itemRequest) {
+        return itemService.save(itemRequest);
     }
 
 

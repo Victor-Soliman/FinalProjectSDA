@@ -5,13 +5,16 @@ import main.controllers.dto.ItemRequest;
 import main.controllers.dto.ItemResponse;
 import main.repository.entity.Item;
 import main.services.ItemService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("item")
 @RequiredArgsConstructor
+@Validated
 public class ItemController {
 
     private final ItemService itemService;
@@ -23,7 +26,7 @@ public class ItemController {
     }
 
     @PostMapping
-    public ItemResponse save(@RequestBody ItemRequest itemRequest) {
+    public ItemResponse save(@Valid @RequestBody ItemRequest itemRequest) {
         return itemService.save(itemRequest);
     }
 

@@ -26,6 +26,7 @@ public class ItemController {
     }
 
     @PostMapping
+    @PatchMapping
     public ItemResponse save(@Valid @RequestBody ItemRequest itemRequest) {
         return itemService.save(itemRequest);
     }

@@ -22,6 +22,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RestControllerAdvice // calsa de afiseare mesaj de exceptie
 public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
 
+
 //    @ExceptionHandler(MyCustomException.class)
 //    public ResponseEntity<Object> handleCustomBusinessException(MyCustomException e) {
 //        return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
@@ -31,6 +32,7 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        log.error("Validation Error ", ex);
         List<String> details = new ArrayList<>();
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             details.add(error.toString());
@@ -39,3 +41,4 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 }
+

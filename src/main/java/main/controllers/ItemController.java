@@ -1,6 +1,7 @@
 package main.controllers;
 
 import lombok.RequiredArgsConstructor;
+import main.controllers.dto.ItemResponse;
 import main.repository.entity.Item;
 import main.services.ItemService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class ItemController {
 
 
     @GetMapping(value = "all")
-    public List<Item> findAll() {
+    public List<ItemResponse> findAll() {
         return itemService.findAll();
     }
 
